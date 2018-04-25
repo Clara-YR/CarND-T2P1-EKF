@@ -1,3 +1,8 @@
+[//]: # (Image References)
+
+[image0]: ./KF_vs_EKF.png "KF vs EKF"
+
+
 # Kalman Filter Equations
 
 Definition of variables:
@@ -158,6 +163,10 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 ```
 **`kalmen_filter.cpp`**
 
+Here is an comparision of Kalman Filter and Extended Kalman Filter from Udacity:
+
+![alt text][image0]
+
 ```
 void KalmanFilter::Predict() {
   /**
@@ -280,6 +289,7 @@ FusionEKF::FusionEKF() {
 
 **`Kalman_filter.cpp`**
 
+1.
 before
 
 ```
@@ -292,6 +302,11 @@ after
 #include "tools.h"
 #include "Eigen/Dense"
 ```
+2. Identity matrix
 
+at first I tried to create identity matrix via
+```
+
+```
 
 
