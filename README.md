@@ -1,9 +1,14 @@
 [//]: # (Image References)
 
 [image0]: ./KF_vs_EKF.png "KF vs EKF"
+[image1]: ./warining.jpg "Failed to listen to port"
+[image2]: ./fault1.jpg "Failed to listen to port"
+[image3]: ./fault2.jpg "Failed to listen to port"
 
 
 # Kalman Filter Equations
+
+## Variables Definition
 
 Definition of variables:
 
@@ -22,6 +27,7 @@ Here is a summary table of all the varibles used in Kalmen Filter:
 |Variables|Representation|Type|Shape|
 |:------:|:------:|:------:|:----|
 |x|object state|vector|(px, py, vx, vy)|
+|z|measurement vector|vector|(rho, phi, rho_dot) for Radar and (px, py, vx, vy) for Laser
 |P|object covariance matrix|matrix|
 |u|external motion|vector|
 |F|state transition matrix|matrix|
@@ -36,14 +42,24 @@ Here is a summary table of all the varibles used in Kalmen Filter:
 ## Prediction
 Known are x(k), u(k) and measurement z(k)
 
-1. State Prediction __x(k+1|k) = F(k) * x(k) + G(k)u(k)__
+1. State Prediction __x(k+1|k) = F(k) * x(k) + G(k) * u(k)__
+
+__Note:__ u(k) is represented by a Gaussian distribution with mean zero hence we set u(k)=0. So I actually used __x(k+1|k) = F(k) * x(k)__in my code.
+
 2. Measurement Prediction __z(k+1|k) = H(k) * x(k+1|k)__
 
 ## Measurement Update
 For laser:
 
-3. Measurement Residual __v(k) = z(k+1) - z(k+1|k)__
-4. Updated State Estimate __x(k+1) = x(k+1|k) + K(k+1) * v(k+1)__
+1. Measurement Residual __y(k+1) = z(k+1) - z(k+1|k)__
+
+2. Measurement Prediction Covariance __S(k+1) = H(k+1) * P(k+1|k) * Ht(k+1) + R(k+1)__
+
+3. Filter Gain __K(k+1) = P(k+1|k) * Ht(k+1) * Si(k+1)__, where Ht is the [transpose matrix](https://en.wikipedia.org/wiki/Transpose) of H
+
+4. Updated State Estimate __x(k+1) = x(k+1|k) + K(k+1) * y(k+1)__, where Si is the [inverse matrix](https://en.wikipedia.org/wiki/Invertible_matrix) of S
+
+5. Updated State Covariance __P(k+1) = (I - K(k+1) * H(k+1)) * P(k+1|K)__
 
 
 # File Structure
@@ -87,226 +103,109 @@ Here is a brief overview of what happens when you run the code files:
 
 ## My TODO code
 
-**`tool.cpp`**
+###`tool.cpp`
 
+My code for function CalculateRMSE() is in _line 18 ~ 47_.
 
-```
-VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
-                              const vector<VectorXd> &ground_truth) {
-  /**
-  TODO:
-    * Calculate the RMSE here.
-  */
-	VectorXd rmse(4);
-	rmse << 0,0,0,0;
+My code for function CalculateJacobian() is in _line 56 ~ 78_.
 
-	// check the validity of the following inputs:
-	//  * the estimation vector size should not be zero
-	//  * the estimation vector size should equal ground truth vector size
-	if (estimations.size() != ground_truth.size()
-			|| estimations.size() == 0){
-		cout << "Invalid estimation or ground_truth data" <<endl;
-	return rmse;
-	}
-
-	// accumulate squared residuals
-	for (unsigned int i=0; i < estimations.size(); ++i){
-
-		VectorXd residual = estimations[i] - ground_truth[i];
-
-		// coefficient-wise multiplication
-		residual = residual.array()*residual.array();
-		rmse += residual;
-	}
-
-	// calculate the mean
-	rmse = rmse / estimations.size();
-
-	// calculate the squared root
-	rmse = rmse.array().sqrt();
-
-	//return the root mean squared error
-	return rmse;
-}
-```
-```
-MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
-  /**
-  TODO:
-    * Calculate a Jacobian here.
-  */
-
-	MatrixXd Hj(3,4);
-	// recover state parameters
-	float px = x_state(0);
-	float py = x_state(1);
-	float vx = x_state(2);
-	float vy = x_state(3);
-
-	// pre-compute a set of terms to avoid repeated calculation
-	float c1 = px * px + py * py;
-	float c2 = sqrt(c1);
-	float c3 = (c1 * c2);
-
-	// check division by zero
-	if (fabs(c1) < 0.0001){
-		cout << "CalculateJacobian () - Error - Division by Zero" << endl;
-	}
-
-	// compute the Jacobian matrix
-	Hj << (px/c2), (py/c2), 0, 0,
-		  -(py/c1), (px/c1), 0, 0,
-		  py*(vx*py - vy*px)/c3, px*(px*vy - py*vx)/c3, px/c2, py/c2;
-
-	return Hj;
-}
-```
-**`kalmen_filter.cpp`**
+###`kalmen_filter.cpp`
 
 Here is an comparision of Kalman Filter and Extended Kalman Filter from Udacity:
 
 ![alt text][image0]
 
-```
-void KalmanFilter::Predict() {
-  /**
-  TODO:
-    * predict the state
-  */
-  x_ = F_ * x_;  // x_predicted
-  MatrixXd Ft = F_.transpose();
-  P_ = F_ * P_ * Ft_ + Q_;  // P_predicted
-}
-```
-```
-void KalmanFilter::Update(const VectorXd &z) {
-  /**
-  TODO:
-    * update the state by using Kalman Filter equations
-  */
-  VectorXd z_pred = H_ * x_;  // x_ here is prediceted value
-  VectorXd y = z - z_pred;
-  MatrixXd Ht = H_.transpose();
-  MatrixXd S = H_ * P_ * Ht + R_;  // P_ here is predicted value
-  MatrixXd Si = S.inverse();
-  MatrixXd PHt = P_ * Ht;  // P_ here is predicted value
-  MatrixXd K = PHt * Si;
+In this Project I assumed Fj = F, and f(x,0) = F * x while u = 0. Hence both Radar and Laser share the same prediction measurement function which is in _line 31 ~ 35_.
 
-  //new estimate
-  x_ = x_ + (K * y);  
-  long x_size = x_.size();
-  MatrixXd I = MatrixXd::Identity(x_size, x_size);
-  P_ = (I - K * H_) * P_;
-}
-```
-```
-void KalmanFilter::UpdateEKF(const VectorXd &z) {
-  /**
-  TODO:
-    * update the state by using Extended Kalman Filter equations
-  */
-  
-  float px = x_(0);
-  float py = x_(1);
-  float vx = x_(2);
-  float vy = x_(3);
+Update measurement function for LASER is in _line 44 ~ 53_.
 
-  float rho = sqrt(px*px + py*py);
-  float phi = atan(py/px);
-  float rho_dot = (px*vx + py*vy)/rho;
-  VectorXd hx = VectorXd(3);
-  hx << rho, phi, rho_dot;
-  
-  VectorXd y = z - hx;
-  MatrixXd Hj = Tools::CalculateJacobian(x_);
-  MatrixXd Hjt = Hj.transpose();
-  MatrixXd S = Hj * P_ * Hjt + R_;
-  MatrixXd Si = S.inverse();
-  MatrixXd PHjt = P_ * Hjt;
-  MatrixXd K = PHjt * Si;
+Update measurement function for RADAR is in _line 62 ~ 84_.
 
-}
-```
-**`FusionEKF.cpp`**
+###`FusionEKF.cpp`
+Set initial value for `H_laser_` ,`Hj_`, `ekf_.P_` and `ekf_.F_` in _line 45 ~ 66_.
 
-```
-/*
- * Constructor.
- */
-FusionEKF::FusionEKF() {
-  is_initialized_ = false;
+Initialization is in _line 88 ~ 129_.
 
-  previous_timestamp_ = 0;
+The prediction process is in _line 143 ~ 168_.
 
-  // initializing matrices
-  R_laser_ = MatrixXd(2, 2);
-  R_radar_ = MatrixXd(3, 3);
-  H_laser_ = MatrixXd(2, 4);
-  Hj_ = MatrixXd(3, 4);
-
-  //measurement covariance matrix - laser
-  R_laser_ << 0.0225, 0,
-        0, 0.0225;
-
-  //measurement covariance matrix - radar
-  R_radar_ << 0.09, 0, 0,
-        0, 0.0009, 0,
-        0, 0, 0.09;
-
-  /**
-  TODO:
-    * Finish initializing the FusionEKF.
-    * Set the process and measurement noises
-  */
-
-  /* H matrix projects current state belief into 
-  the measurement space of the sensor.*/
-  // measurement fusntion matrix - laser
-  H_laser_ << 1, 0, 0, 0, 0, 1, 0, 0;
-
-  // Jacobian matrix Hj for RADAR when calculating S, K and P
-  Hj_ << 1, 0, 0, 0,
-         0, 1, 0, 0,
-         0, 0, 1, 0;
-
-}
-```
-```
-
-```
+The measurement update process is in _line 180 ~ 187_.
 
 
 ## Run the Program
 
-1. Download the simulator and open it. In the main menu screen select Project 1: Bicycle tracker with EKF.
+1. Run `sh install-mac.sh` in my project repository directory.
+2. From the root of the repo compiles:
+ * `mkdir build && cd build `
+ * `cmake .. && make`
+ * `./ExtendedKF`
 
-2. Once the scene is loaded you can hit the START button to obse...
 
-3. The 
+# Changes and Questions
 
+This part contains:
 
-# Modification/Changes in original codes in addition to TODO
+- Modification/Changes in original codes in addition to TODO
+- My questions and problems for this project
 
-**`Kalman_filter.cpp`**
+**1.add including files in `Kalman_filter.cpp`**
 
-1.
-before
+I change the including files from 
 
 ```
 #include "kalman_filter.h"
 ```
-after
+to
 
 ```
 #include "kalman_filter.h"
 #include "tools.h"
-#include "Eigen/Dense"
 ```
-2. Identity matrix
+in order to use the `CalculateJacobian()` function in `tools.h`.
 
-at first I tried to create identity matrix via
-```
+**2.Why the same `Predict()` function ?**
+
+I assumed prediction measurement f(x, 0) = F * x for radar sensor since I didn't know how to calculate Fj. Is it right and why?
+
+**3.Identity matrix in `Update()` and `UpdateEKF()`**
+
+At first I tried to create identity matrix via
 
 ```
+	long x_size = x_.size();
+	MatrixXd I = MatrixXd::Identity(x_size, x_size);
+	P_ = (I - K * H_) * P_;
+```
+but it didn't work, then I used
+
+```
+P_ = (MatrixXd::Identity(2, 2) - K_ * H_) * P_;
+```
+in `Update()` for laser and
+
+```
+P_ = (MatrixXd::Identity(3, 3) - K_ * H_) * P_;
+```
+in `UpdateEKF()` for radar. 
+Why my previous didn't work?
+
+**4. variable with and without `_` ?**
+What's the difference when create a variable with and without the underline `_`?
+For example, `VectorXd x;` and `VectorXd x_;`?
+
+**5. Segmentation fault: 11 ?**
+
+When I run `cmake .. && make` there were some warinings.
+
+![alt text][image1]
+
+Then I tried `./ExtendedKF path/to/input.txt path/to/output.txt`
+
+![alt text][image2]
+
+and then tried `./ExtendedKF` again but still failed
+
+![alt text][image3]
+
+How to solve this problem?
 
 

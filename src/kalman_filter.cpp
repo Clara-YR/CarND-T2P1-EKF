@@ -28,9 +28,11 @@ void KalmanFilter::Predict() {
     TODO:
       * predict the state
     */
-    x_ = F_ * x_;  // state estimate prediction
+    // state prediction
+    x_ = F_ * x_;
+    // state prediction covariance
     MatrixXd Ft = F_.transpose();
-    P_ = F_ * P_ * Ft + Q_;  // prediction of the error covariance matrix of x
+    P_ = F_ * P_ * Ft + Q_;
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
@@ -40,15 +42,15 @@ void KalmanFilter::Update(const VectorXd &z) {
     */
 
     // x_ and P_ here are the prediction calculated by `Predict()`
-    VectorXd y_ = z - H_ * x_;  // measurement redisual
-    MatrixXd Ht_ = H_.transpose();
-    MatrixXd S_ = H_ * P_ * Ht_ + R_;
-    MatrixXd Si_ = S_.inverse();
-    MatrixXd K_ = P_ * Ht_ * Si_;  // P_ here is predicted value
+    VectorXd y = z - H_ * x_;  // measurement redisual
+    MatrixXd Ht = H_.transpose();
+    MatrixXd S = H_ * P_ * Ht + R_;
+    MatrixXd Si = S.inverse();
+    MatrixXd K = P_ * Ht * Si;  // P_ here is predicted value
 
     //new estimate
-    x_ = x_ + (K_ * y_);  // update state estimate
-    P_ = (MatrixXd::Identity(2, 2) - K_ * H_) * P_;
+    x_ = x_ + (K * y);  // update state estimate
+    P_ = (MatrixXd::Identity(2, 2) - K * H_) * P_; // update the state covariance
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -56,6 +58,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     TODO:
       * update the state by using Extended Kalman Filter equations
     */
+    // calculate h(x)
     Tools tools;
 
     float px = x_(0);
@@ -66,19 +69,17 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     float rho = sqrt(px * px + py * py);
     float phi = atan(py / px);
     float rho_dot = (px * vx + py * vy) / rho;
+    VectorXd hx;
+    hx << rho, phi, rho_dot;
 
-    VectorXd hx_;
-    //hx_ = VectorXd(3);
-    hx_ << rho, phi, rho_dot;
-
-    VectorXd y_ = z - hx_;
-    MatrixXd Hj_ = tools.CalculateJacobian(x_);
-    MatrixXd Hjt = Hj_.transpose();
-    MatrixXd S_ = Hj_ * P_ * Hjt + R_;
-    MatrixXd Si_ = S_.inverse();
-    MatrixXd K_ = P_ * Hjt * Si_;
+    VectorXd y = z - hx;
+    MatrixXd Hj = tools.CalculateJacobian(x_);
+    MatrixXd Hjt = Hj.transpose();
+    MatrixXd S = Hj * P_ * Hjt + R_;
+    MatrixXd Si = S.inverse();
+    MatrixXd K = P_ * Hjt * Si;
 
     //new estimate
-    x_ = x_ + (K_ * y_);  // update state estimate
-    P_ = (MatrixXd::Identity(3, 3) - K_ * H_) * P_;
+    x_ = x_ + (K * y);  // update state estimate
+    P_ = (MatrixXd::Identity(3, 3) - K * H_) * P_;  // update the state covariance
 }
