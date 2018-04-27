@@ -41,11 +41,8 @@ void KalmanFilter::Update(const VectorXd &z) {
     * update the state by using Kalman Filter equations
     */
     VectorXd y = z - H_ * x_;
-    cout << "\ny = " << y << endl;
     MatrixXd S = H_ * P_ * H_.transpose() + R_;
-    cout << "\nS = " << S << endl;
     MatrixXd K = P_ * H_.transpose() * S.inverse();
-    cout << "\nK = " << K << endl;
 
     // Estimation
     x_ = x_ + (K * y);  // update state estimate
@@ -57,7 +54,6 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     TODO:
       * update the state by using Extended Kalman Filter equations
     */
-    cout << "KalmanFilter::UpdateEKF() run..." << endl;
     // calculate h(x)
     Tools tools;
 

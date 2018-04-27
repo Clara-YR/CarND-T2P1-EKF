@@ -12,15 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="817cdd1a-1e61-451f-a19e-5e826dfc5e57" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/src/FusionEKF.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/src/FusionEKF.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/src/kalman_filter.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/src/kalman_filter.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/src/tools.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/ExtendedKF.dir/src/tools.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../build/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/ExtendedKF" beforeDir="false" afterPath="$PROJECT_DIR$/../build/ExtendedKF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FusionEKF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FusionEKF.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kalman_filter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/kalman_filter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools.cpp" afterDir="false" />
     </list>
@@ -40,7 +31,7 @@
           <file leaf-file-name="FusionEKF.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/FusionEKF.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="256">
+                <state relative-caret-position="-8">
                   <caret line="162" column="52" selection-start-line="162" selection-start-column="52" selection-end-line="162" selection-end-column="52" />
                   <folding>
                     <element signature="e#0#22#0" expanded="true" />
@@ -52,8 +43,8 @@
           <file leaf-file-name="tools.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tools.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="725">
-                  <caret line="76" selection-start-line="76" selection-end-line="76" />
+                <state relative-caret-position="450">
+                  <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
                   <folding>
                     <element signature="e#0#19#0" expanded="true" />
                   </folding>
@@ -92,7 +83,7 @@
           <file leaf-file-name="kalman_filter.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/kalman_filter.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-89">
+                <state relative-caret-position="285">
                   <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
                 </state>
               </provider>
@@ -101,8 +92,8 @@
           <file leaf-file-name="kalman_filter.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/kalman_filter.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="631">
-                  <caret line="83" column="82" selection-start-line="83" selection-start-column="82" selection-end-line="83" selection-end-column="82" />
+                <state relative-caret-position="9">
+                  <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
                 </state>
               </provider>
             </entry>
@@ -218,12 +209,12 @@
       <workItem from="1524811148584" duration="1837000" />
       <workItem from="1524825653955" duration="1550000" />
       <workItem from="1524828166443" duration="10603000" />
-      <workItem from="1524839522938" duration="348000" />
+      <workItem from="1524839522938" duration="619000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27247000" />
+    <option name="totallyTimeSpent" value="27518000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -240,9 +231,10 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24876674" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32917705" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32917705" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.32917705" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32917705" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32917705" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32917705" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32917705" />
@@ -255,7 +247,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32917705" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,27 +467,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/kalman_filter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tools.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        <state relative-caret-position="450">
+          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kalman_filter.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-89">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kalman_filter.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="83" column="82" selection-start-line="83" selection-start-column="82" selection-end-line="83" selection-end-column="82" />
+        <state relative-caret-position="9">
+          <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
         </state>
       </provider>
     </entry>
