@@ -12,8 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="817cdd1a-1e61-451f-a19e-5e826dfc5e57" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/kalman_filter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/kalman_filter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/../cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +42,8 @@
           <file leaf-file-name="tools.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tools.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+                <state relative-caret-position="57">
+                  <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="29" />
                   <folding>
                     <element signature="e#0#19#0" expanded="true" />
                   </folding>
@@ -92,7 +91,7 @@
           <file leaf-file-name="kalman_filter.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/kalman_filter.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="9">
+                <state relative-caret-position="271">
                   <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
                 </state>
               </provider>
@@ -209,12 +208,12 @@
       <workItem from="1524811148584" duration="1837000" />
       <workItem from="1524825653955" duration="1550000" />
       <workItem from="1524828166443" duration="10603000" />
-      <workItem from="1524839522938" duration="619000" />
+      <workItem from="1524839522938" duration="982000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27518000" />
+    <option name="totallyTimeSpent" value="27881000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -459,8 +458,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FusionEKF.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="148" column="27" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
+        <state relative-caret-position="-8">
+          <caret line="162" column="52" selection-start-line="162" selection-start-column="52" selection-end-line="162" selection-end-column="52" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -474,20 +473,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools.cpp">
+    <entry file="file://$PROJECT_DIR$/kalman_filter.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="271">
+          <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kalman_filter.cpp">
+    <entry file="file://$PROJECT_DIR$/tools.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
+        <state relative-caret-position="57">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

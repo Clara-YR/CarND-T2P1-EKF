@@ -2,8 +2,6 @@
 
 [image0]: ./KF_vs_EKF.png "KF vs EKF"
 [image1]: ./warining.jpg "Failed to listen to port"
-[image2]: ./fault1.jpg "Failed to listen to port"
-[image3]: ./fault2.jpg "Failed to listen to port"
 
 
 # Kalman Filter Equations
@@ -179,15 +177,10 @@ At first I tried to create identity matrix via
 but it didn't work, then I used
 
 ```
-P_ = (MatrixXd::Identity(2, 2) - K_ * H_) * P_;
+P_ = (MatrixXd::Identity(4, 4) - K_ * H_) * P_;
 ```
-in `Update()` for laser and
+in both `Update()` and `UpdateEKF()`
 
-```
-P_ = (MatrixXd::Identity(3, 3) - K_ * H_) * P_;
-```
-in `UpdateEKF()` for radar. 
-Why my previous didn't work?
 
 **4. variable with and without `_` ?**
 What's the difference when create a variable with and without the underline `_`?
@@ -198,14 +191,6 @@ For example, `VectorXd x;` and `VectorXd x_;`?
 When I run `cmake .. && make` there were some warinings.
 
 ![alt text][image1]
-
-Then I tried `./ExtendedKF path/to/input.txt path/to/output.txt`
-
-![alt text][image2]
-
-and then tried `./ExtendedKF` again but still failed
-
-![alt text][image3]
 
 How to solve this problem?
 
