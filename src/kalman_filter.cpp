@@ -1,10 +1,10 @@
+#include <iostream> // print function out
 #include "kalman_filter.h"
 #include "tools.h"
 
-using namespace std;  // print pinout
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
-
+using namespace std;  // print function out
 
 // Please note that the Eigen library does not initialize
 // VectorXd or MatrixXd objects with zeros upon creation.
@@ -33,6 +33,7 @@ void KalmanFilter::Predict() {
     // state prediction covariance
     MatrixXd Ft = F_.transpose();
     P_ = F_ * P_ * Ft + Q_;
+    cout << "KalmanFilter::Predict() done." << endl;
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
@@ -40,7 +41,7 @@ void KalmanFilter::Update(const VectorXd &z) {
     TODO:
     * update the state by using Kalman Filter equations
     */
-
+    cout << "KalmanFilter::Update() run ... " << endl;
     // x_ and P_ here are the prediction calculated by `Predict()`
     VectorXd y = z - H_ * x_;  // measurement redisual
     MatrixXd Ht = H_.transpose();
@@ -51,6 +52,7 @@ void KalmanFilter::Update(const VectorXd &z) {
     //new estimate
     x_ = x_ + (K * y);  // update state estimate
     P_ = (MatrixXd::Identity(2, 2) - K * H_) * P_; // update the state covariance
+    cout << "KalmanFilter::Update() done." << endl;
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -58,6 +60,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     TODO:
       * update the state by using Extended Kalman Filter equations
     */
+    cout << "KalmanFilter::UpdateEKF() run..." << endl;
     // calculate h(x)
     Tools tools;
 
@@ -82,4 +85,5 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     //new estimate
     x_ = x_ + (K * y);  // update state estimate
     P_ = (MatrixXd::Identity(3, 3) - K * H_) * P_;  // update the state covariance
+    cout << "KalmanFilter::UpdateEKF() done" << endl;
 }
