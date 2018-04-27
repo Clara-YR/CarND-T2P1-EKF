@@ -41,18 +41,18 @@ void KalmanFilter::Update(const VectorXd &z) {
     TODO:
     * update the state by using Kalman Filter equations
     */
-    cout << "KalmanFilter::Update() run ... " << endl;
-    // x_ and P_ here are the prediction calculated by `Predict()`
-    VectorXd y = z - H_ * x_;  // measurement redisual
-    MatrixXd Ht = H_.transpose();
-    MatrixXd S = H_ * P_ * Ht + R_;
-    MatrixXd Si = S.inverse();
-    MatrixXd K = P_ * Ht * Si;  // P_ here is predicted value
+    cout << "\nKalmanFilter::Update() run ... " << endl;
+    VectorXd y = z - H_ * x_;
+    cout << "\ny = " << y << endl;
+    MatrixXd S = H_ * P_ * H_.transpose() + R_;
+    cout << "\nS = " << S << endl;
+    MatrixXd K = P_ * H_.transpose() * S.inverse();
+    cout << "\nK = " << K << endl;
 
-    //new estimate
+    // Estimation
     x_ = x_ + (K * y);  // update state estimate
-    P_ = (MatrixXd::Identity(2, 2) - K * H_) * P_; // update the state covariance
-    cout << "KalmanFilter::Update() done." << endl;
+    P_ = (MatrixXd::Identity(4, 4) - K * H_) * P_; // update the state covariance
+    cout << "\nKalmanFilter::Update() done " << endl;
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -72,18 +72,29 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     float rho = sqrt(px * px + py * py);
     float phi = atan(py / px);
     float rho_dot = (px * vx + py * vy) / rho;
-    VectorXd hx;
+    VectorXd hx = VectorXd(3);
     hx << rho, phi, rho_dot;
+    cout << "\nhx = " << hx << endl;
 
     VectorXd y = z - hx;
+    cout << "\ny = " << y << endl;
     MatrixXd Hj = tools.CalculateJacobian(x_);
+    cout << "\nHj = " << Hj << endl;
+    cout << "\nHj.transpose() = " << Hj.transpose() << endl;
     MatrixXd Hjt = Hj.transpose();
+    cout << "\nHjt = " << Hjt << endl;
+    cout << "\nHj * P_ * Hjt = " << Hj * P_ * Hjt << endl;
+    cout << "\nR_" << R_ << endl;
     MatrixXd S = Hj * P_ * Hjt + R_;
+    cout << "\nS = " << S << endl;
     MatrixXd Si = S.inverse();
+    cout << "\nSi = " << Si << endl;
     MatrixXd K = P_ * Hjt * Si;
+    cout << "\nK = " << K << endl;
 
     //new estimate
+    cout << "\n K*y = " << K * y << endl;
     x_ = x_ + (K * y);  // update state estimate
-    P_ = (MatrixXd::Identity(3, 3) - K * H_) * P_;  // update the state covariance
+    P_ = (MatrixXd::Identity(4, 4) - K * H_) * P_;  // update the state covariance
     cout << "KalmanFilter::UpdateEKF() done" << endl;
 }
