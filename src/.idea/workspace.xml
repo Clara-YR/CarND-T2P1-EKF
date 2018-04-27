@@ -12,16 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="817cdd1a-1e61-451f-a19e-5e826dfc5e57" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/ExtendedKF.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/ExtendedKF.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/ExtendedKF.dir/src/FusionEKF.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/ExtendedKF.dir/src/kalman_filter.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/ExtendedKF.dir/src/kalman_filter.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/ExtendedKF" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/ExtendedKF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/ExtendedKF.dSYM/Contents/Resources/DWARF/ExtendedKF" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/ExtendedKF.dSYM/Contents/Resources/DWARF/ExtendedKF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FusionEKF.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FusionEKF.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kalman_filter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/kalman_filter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/../cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -227,12 +218,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1524616770046</updated>
-      <workItem from="1524616772991" duration="12642000" />
+      <workItem from="1524616772991" duration="12909000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12642000" />
+    <option name="totallyTimeSpent" value="12909000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -244,8 +235,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="834" height="900" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24926108" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32917705" />
