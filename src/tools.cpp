@@ -15,7 +15,6 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	TODO:
 	* Calculate the RMSE here.
 	*/
-	std::cout << "Tools::CalculateRMSE begin ..." << endl;
 	VectorXd rmse(4);
 	rmse << 0,0,0,0;
 
@@ -32,22 +31,18 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	for (unsigned int i=0; i < estimations.size(); ++i){
         std::cout << "\ni = " << i << endl;
 		VectorXd residual = estimations[i] - ground_truth[i];
-		std::cout << "\nresidual = " << residual << endl;
 
 		// coefficient-wise multiplication
 		residual = residual.array().abs().sqrt();
-		std::cout << "\nresidual^2 = " << residual << endl;
 		rmse += residual;
 	}
 
 	// calculate the mean
 	rmse = rmse / estimations.size();
-	std::cout << "\nrmse_1 = " << rmse << endl;
 
 	// calculate the squared root
 	rmse = rmse.array().sqrt();
 
-	std::cout << "RMSE = " << rmse << endl;
 	//return the root mean squared error
 	return rmse;
 }
@@ -57,7 +52,6 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 	TODO:
 	* Calculate a Jacobian here.
 	*/
-	std::cout << "Tools::CalculateJacobian run ..." << endl;
 
 	MatrixXd Hj(3,4);
 	// recover state parameters
@@ -80,8 +74,6 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 	Hj << (px/c2), (py/c2), 0, 0,
 		  -(py/c1), (px/c1), 0, 0,
 		  py*(vx*py - vy*px)/c3, px*(px*vy - py*vx)/c3, px/c2, py/c2;
-	cout << "\nHj = " << Hj << endl;
 
-	std::cout << "Tools::CalculateJacobian done." << endl;
 	return Hj;
 }
